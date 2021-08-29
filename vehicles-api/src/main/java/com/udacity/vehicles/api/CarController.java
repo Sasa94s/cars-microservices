@@ -1,6 +1,7 @@
 package com.udacity.vehicles.api;
 
 
+import com.udacity.vehicles.assembler.CarResourceAssembler;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.service.CarService;
 import org.springframework.hateoas.CollectionModel;
@@ -15,20 +16,17 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 /**
  * Implements a REST-based controller for the Vehicles API.
  */
 @RestController
 @RequestMapping("/cars")
-class CarController {
+public class CarController {
 
     private final CarService carService;
     private final CarResourceAssembler assembler;
 
-    CarController(CarService carService, CarResourceAssembler assembler) {
+    public CarController(CarService carService, CarResourceAssembler assembler) {
         this.carService = carService;
         this.assembler = assembler;
     }
@@ -38,10 +36,9 @@ class CarController {
      * @return list of vehicles
      */
     @GetMapping
-    CollectionModel<EntityModel<Car>> list() {
+    public CollectionModel<EntityModel<Car>> list() {
         List<Car> carList = carService.list();
-        return assembler.toCollectionModel(carList)
-                .add(linkTo(methodOn(CarController.class).list()).withSelfRel());
+        return assembler.toCollectionModel(carList);
     }
 
     /**
@@ -50,7 +47,7 @@ class CarController {
      * @return all information for the requested vehicle
      */
     @GetMapping("/{id}")
-    EntityModel<Car> get(@PathVariable Long id) {
+    public EntityModel<Car> get(@PathVariable Long id) {
         Car car = carService.findById(id);
 
         return assembler.toModel(car);
@@ -63,7 +60,7 @@ class CarController {
      * @throws URISyntaxException if the request contains invalid fields or syntax
      */
     @PostMapping
-    ResponseEntity<?> post(@Valid @RequestBody Car car) throws URISyntaxException {
+    public ResponseEntity<?> post(@Valid @RequestBody Car car) throws URISyntaxException {
         carService.save(car);
         EntityModel<Car> model = assembler.toModel(car);
         Optional<Link> optionalLink = model.getLink("self");
@@ -81,7 +78,7 @@ class CarController {
      * @return response that the vehicle was updated in the system
      */
     @PutMapping("/{id}")
-    ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
+    public ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
         car.setId(id);
         carService.save(car);
         EntityModel<Car> resource = assembler.toModel(car);
@@ -95,7 +92,7 @@ class CarController {
      * @return response that the related vehicle is no longer in the system
      */
     @DeleteMapping("/{id}")
-    ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         carService.delete(id);
 
         return ResponseEntity.noContent().build();

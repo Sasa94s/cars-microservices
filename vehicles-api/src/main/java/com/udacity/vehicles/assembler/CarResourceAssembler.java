@@ -1,6 +1,8 @@
-package com.udacity.vehicles.api;
+package com.udacity.vehicles.assembler;
 
+import com.udacity.vehicles.api.CarController;
 import com.udacity.vehicles.domain.car.Car;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  */
 @Component
 public class CarResourceAssembler implements RepresentationModelAssembler<Car, EntityModel<Car>> {
+
+    @Override
+    public CollectionModel<EntityModel<Car>> toCollectionModel(Iterable<? extends Car> entities) {
+        return RepresentationModelAssembler.super.toCollectionModel(entities)
+                .add(linkTo(methodOn(CarController.class).list()).withSelfRel());
+    }
 
     @Override
     public EntityModel<Car> toModel(Car car) {
