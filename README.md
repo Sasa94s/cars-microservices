@@ -17,7 +17,7 @@ should be running at once for full operation. Further instructions are available
 The project requires the use of:
 - [Maven](https://maven.apache.org/) ([Download](https://maven.apache.org/download.cgi) and [Setup](https://www.baeldung.com/install-maven-on-windows-linux-mac))
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- Java v11 ([Download JDK11])(https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- Java v11 ([Download JDK11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html))
 
 ## Run the applications
 Note that the Eureka Server, Boogle Maps, Pricing Service and Vehicles API applications must all be running for all operations to perform correctly, although they should be able to launch on their own.
