@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/maps")
 public class MapsController {
 
+    /**
+     * Retrieves address information based on latitude and longitude.
+     * @param lat Latitude
+     * @param lon Longitude
+     * @return Address information
+     */
     @GetMapping
     public Address get(@RequestParam Double lat, @RequestParam Double lon) {
         return MockAddressRepository.getRandom();
