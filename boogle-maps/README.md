@@ -10,7 +10,10 @@ longitude, will return a random address.
 
 ## Instructions
 
-Via shell it can be started using
+#### Run the code
+**Note:** It is always recommended starting the [Eureka Server](../eureka-server/README.md) first.
+
+To run this service you execute via shell:
 
 ```
 $ mvn clean package
@@ -33,7 +36,7 @@ run the class `BoogleMapsApplication`.
 
 ## Operations
 
-Swagger UI: http://localhost:9191/swagger-ui.html
+Swagger UI: http://localhost:9191/swagger-ui/
 
 ### Get Address
 

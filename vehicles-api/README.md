@@ -19,9 +19,7 @@ view of vehicle details including price and address.
 
 #### Run the Code
 
-To properly run this application you need to start the Orders API and
-the Service API first.
-
+To properly run this application you need to start the [Eureka Server](../eureka-server/README.md) first, then execute the following via shell:
 
 ```
 $ mvn clean package
@@ -38,7 +36,7 @@ and run the class `VehiclesApiApplication`.
 
 ## Operations
 
-Swagger UI: http://localhost:8080/swagger-ui.html
+Swagger UI: http://localhost:8080/swagger-ui/
 
 ### Create a Vehicle
 

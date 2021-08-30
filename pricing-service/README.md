@@ -18,6 +18,8 @@ input.
 
 #### Run the code
 
+**Note:** It is always recommended starting the [Eureka Server](../eureka-server/README.md) first.
+
 To run this service you execute:
 
 ```
@@ -35,7 +37,7 @@ and run the class `PricingServiceApplication`.
 
 ## Operations
 
-Swagger UI: http://localhost:8082/swagger-ui.html
+Swagger UI: http://localhost:8082/swagger-ui/
 
 ### Get Prices
 
