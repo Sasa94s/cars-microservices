@@ -6,6 +6,7 @@ import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,9 @@ public class CarService {
      * @return a list of all vehicles in the CarRepository
      */
     public List<Car> list() {
-        return repository.findAll();
+        return repository.findAll().stream()
+                .peek(this::fetchPriceAndAddress)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -53,12 +56,7 @@ public class CarService {
      */
     public Car findById(Long id) {
         Car car = repository.findById(id).orElseThrow(CarNotFoundException::new);
-
-        String price = priceClient.getPrice(id);
-        car.setPrice(price);
-
-        Location address = mapsClient.getAddress(car.getLocation());
-        car.setLocation(address);
+        fetchPriceAndAddress(car);
 
         return car;
     }
@@ -74,11 +72,16 @@ public class CarService {
                     .map(carToBeUpdated -> {
                         carToBeUpdated.setDetails(car.getDetails());
                         carToBeUpdated.setLocation(car.getLocation());
-                        return repository.save(carToBeUpdated);
+                        carToBeUpdated = repository.save(carToBeUpdated);
+                        fetchPriceAndAddress(carToBeUpdated);
+                        return carToBeUpdated;
                     }).orElseThrow(CarNotFoundException::new);
         }
 
-        return repository.save(car);
+        repository.save(car);
+        fetchPriceAndAddress(car);
+
+        return car;
     }
 
     /**
@@ -90,5 +93,17 @@ public class CarService {
 
         repository.delete(car);
         repository.save(car);
+    }
+
+    /**
+     * Fetches and sets Car object in-place price and address by calling other separate services
+     * @param car @Car object
+     */
+    public void fetchPriceAndAddress(Car car) {
+        String price = priceClient.getPrice(car.getId());
+        car.setPrice(price);
+
+        Location address = mapsClient.getAddress(car.getLocation());
+        car.setLocation(address);
     }
 }
