@@ -44,7 +44,7 @@ Swagger UI: http://localhost:8080/swagger-ui/
 
 Posts information to create a new vehicle in the system.
 
-`Response code: 201; Time: 464ms; Content length: 546 bytes`
+`Response code: 201; Time: 1892ms; Content length: 590 bytes`
 ```
 HTTP/1.1 201 
 Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE
@@ -53,14 +53,14 @@ Access-Control-Allow-Credentials: true
 Location: http://localhost:8080/cars/1
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
-Date: Mon, 30 Aug 2021 11:02:12 GMT
+Date: Mon, 30 Aug 2021 17:51:05 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 
 {
   "id": 1,
-  "createdAt": "2021-08-30T13:02:12.6813132",
-  "modifiedAt": "2021-08-30T13:02:12.6813132",
+  "createdAt": "2021-08-30T19:51:04.0687379",
+  "modifiedAt": "2021-08-30T19:51:04.0687379",
   "condition": "USED",
   "details": {
     "body": "sedan",
@@ -80,12 +80,12 @@ Connection: keep-alive
   "location": {
     "lat": 40.73061,
     "lon": -73.935242,
-    "address": null,
-    "city": null,
-    "state": null,
-    "zip": null
+    "address": "630 Coonial Promenade Pkwy",
+    "city": "Alabaster",
+    "state": "AL",
+    "zip": "35007"
   },
-  "price": null,
+  "price": "USD 16410.92",
   "_links": {
     "self": {
       "href": "http://localhost:8080/cars/1"
@@ -190,15 +190,17 @@ Updates the information of a vehicle in the system.
 }
 ```
 
-`Response code: 200; Time: 294ms; Content length: 499 bytes`
+`Response code: 200; Time: 477ms; Content length: 527 bytes`
 ```
+PUT http://localhost:8080/cars/1
+
 HTTP/1.1 200 
 Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE
 Access-Control-Max-Age: 3600
 Access-Control-Allow-Credentials: true
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
-Date: Mon, 30 Aug 2021 11:09:38 GMT
+Date: Mon, 30 Aug 2021 17:54:39 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 
@@ -225,10 +227,10 @@ Connection: keep-alive
   "location": {
     "lat": 40.73061,
     "lon": -73.935242,
-    "address": null,
-    "city": null,
-    "state": null,
-    "zip": null
+    "address": "100 Elm Ridge Center Dr",
+    "city": "Greece",
+    "state": "NY",
+    "zip": "14626"
   },
   "price": null,
   "_links": {
